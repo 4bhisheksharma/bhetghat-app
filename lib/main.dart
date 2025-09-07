@@ -1,4 +1,5 @@
 import 'package:bhetghat/pages/auth/login_page.dart';
+import 'package:bhetghat/pages/auth/register_page.dart';
 import 'package:bhetghat/theme/dark_mode.dart';
 import 'package:bhetghat/theme/light_mode.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'BhetGhat',
       theme: lightModeTheme,
       darkTheme: darkModeTheme,
-      home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }
