@@ -1,4 +1,6 @@
 import 'package:bhetghat/pages/auth/login_page.dart';
+import 'package:bhetghat/theme/dark_mode.dart';
+import 'package:bhetghat/theme/light_mode.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BhetGhat',
-      theme: ThemeData(),
+      theme: lightModeTheme,
+      darkTheme: darkModeTheme,
       home: LoginPage(),
     );
   }
