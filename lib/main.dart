@@ -1,3 +1,4 @@
+import 'package:bhetghat/controller/auth.dart';
 import 'package:bhetghat/controller/login_or_register.dart';
 import 'package:bhetghat/firebase_options.dart';
 import 'package:bhetghat/theme/dark_mode.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'BhetGhat',
       theme: lightModeTheme,
       darkTheme: darkModeTheme,
-      home: LoginOrRegister(),
+      home: AuthPage(),
     );
   }
 }
