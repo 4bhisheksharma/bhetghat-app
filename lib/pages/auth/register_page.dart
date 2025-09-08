@@ -1,6 +1,7 @@
 import 'package:bhetghat/components/my_button.dart';
 import 'package:bhetghat/components/my_text_field.dart';
 import 'package:bhetghat/helper/helper_funtions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -51,8 +52,11 @@ class _RegisterPageState extends State<RegisterPage> {
               password: passwordcontroller.text,
             );
 
+        //create a user doc and add to firebase db
+        createUserDocument(userCredential);
+
         //pop the loading circle
-        Navigator.pop(context);
+        if (context.mounted) Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         //pop the loading circle
         Navigator.pop(context);
@@ -60,6 +64,19 @@ class _RegisterPageState extends State<RegisterPage> {
         //show error message
         displayMessageToUser(e.message!, context);
       }
+    }
+  }
+
+  //create method to collect user data into firebase
+  Future<void> createUserDocument(UserCredential? userCredential) async {
+    if (userCredential != null && userCredential.user != null) {
+      await FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email)
+          .set({
+            'email': userCredential.user!.email,
+            'username': usernamecontroller.text,
+          });
     }
   }
 

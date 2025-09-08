@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
+  //logout method
+  void logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   const MyDrawer({super.key});
 
   @override
@@ -46,7 +52,12 @@ class MyDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                   title: const Text('P R O F I L E'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    //nav to profile
+                    Navigator.pushNamed(context, '/profile_page');
+                  },
                 ),
               ),
 
@@ -59,7 +70,12 @@ class MyDrawer extends StatelessWidget {
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
                   title: const Text('U S E R S'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    //nav to users page
+                    Navigator.pushNamed(context, '/users_page');
+                  },
                 ),
               ),
             ],
@@ -74,7 +90,10 @@ class MyDrawer extends StatelessWidget {
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
               title: const Text('L O G O U T'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                logout();
+              },
             ),
           ),
         ],
