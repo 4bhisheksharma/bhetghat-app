@@ -3,14 +3,15 @@ import 'package:bhetghat/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
+  final void Function()? onTap;
+
+  RegisterPage({super.key, this.onTap});
   //text controller
   final TextEditingController usernamecontroller = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController confirmpasswordcontroller =
       TextEditingController();
-
-  RegisterPage({super.key});
 
   //register method
   void registerUser() {}
@@ -102,7 +103,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: onTap,
                       child: Text(
                         ' Sign In',
                         style: TextStyle(fontWeight: FontWeight.bold),

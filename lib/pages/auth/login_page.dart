@@ -3,13 +3,15 @@ import 'package:bhetghat/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
+  final void Function()? onTap;
+
+  LoginPage({super.key, required this.onTap});
   //text controller
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
 
-  LoginPage({super.key});
-
   //login method
+  void loginUser() {}
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: onTap,
                       child: Text(
                         ' Sign Up',
                         style: TextStyle(fontWeight: FontWeight.bold),
