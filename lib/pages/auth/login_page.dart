@@ -1,17 +1,52 @@
 import 'package:bhetghat/components/my_button.dart';
 import 'package:bhetghat/components/my_text_field.dart';
+import 'package:bhetghat/helper/helper_funtions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
-  LoginPage({super.key, required this.onTap});
+  const LoginPage({super.key, required this.onTap});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //text controller
   final TextEditingController emailcontroller = TextEditingController();
+
   final TextEditingController passwordcontroller = TextEditingController();
 
   //login method
-  void loginUser() {}
+  void loginUser() async {
+    //show loaging circle
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+
+    // try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailcontroller.text,
+        password: passwordcontroller.text,
+      );
+      //pop the loading circle
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    }
+    // display error message
+    on FirebaseAuthException catch (e) {
+      //pop the loading circle
+      Navigator.pop(context);
+
+      //show error message
+      displayMessageToUser(e.message!, context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +121,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: onTap,
+                      onTap: widget.onTap,
                       child: Text(
                         ' Sign Up',
                         style: TextStyle(fontWeight: FontWeight.bold),
