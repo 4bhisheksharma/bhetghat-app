@@ -27,43 +27,41 @@ class _RegisterPageState extends State<RegisterPage> {
 
   //register method
   Future<void> registerUser() async {
-    //show loading progress indicator
+    if (!mounted) return; // ensure widget is still alive
     showDialog(
       context: context,
-      builder: (context) {
-        return const Center(child: CircularProgressIndicator());
-      },
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    // to check password is matched or not
+    // check if passwords match
     if (passwordcontroller.text != confirmpasswordcontroller.text) {
-      //pop the loading circle
+      if (!mounted) return;
       Navigator.pop(context);
 
-      //show error message
-      displayMessageToUser("Password don't match", context);
-    } else {
-      //try to create the user
-      try {
-        //creating user
-        UserCredential? userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-              email: emailcontroller.text,
-              password: passwordcontroller.text,
-            );
+      if (!mounted) return;
+      displayMessageToUser("Passwords don't match", context);
+      return;
+    }
 
-        //create a user doc and add to firebase db
-        createUserDocument(userCredential);
+    try {
+      // create user
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailcontroller.text,
+            password: passwordcontroller.text,
+          );
 
-        //pop the loading circle
-        if (context.mounted) Navigator.pop(context);
-      } on FirebaseAuthException catch (e) {
-        //pop the loading circle
-        Navigator.pop(context);
+      // create Firestore user doc
+      createUserDocument(userCredential);
 
-        //show error message
-        displayMessageToUser(e.message!, context);
-      }
+      if (!mounted) return;
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      Navigator.pop(context);
+
+      if (!mounted) return;
+      displayMessageToUser(e.code, context);
     }
   }
 

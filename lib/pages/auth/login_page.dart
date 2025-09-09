@@ -16,35 +16,33 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   //text controller
   final TextEditingController emailcontroller = TextEditingController();
-
   final TextEditingController passwordcontroller = TextEditingController();
 
   //login method
   void loginUser() async {
-    //show loaging circle
+    // show loading circle
+    if (!mounted) return; // ensure widget still exists before showing dialog
     showDialog(
       context: context,
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    // try sign in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailcontroller.text,
         password: passwordcontroller.text,
       );
-      //pop the loading circle
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
-    }
-    // display error message
-    on FirebaseAuthException catch (e) {
-      //pop the loading circle
+
+      // pop the loading circle safely
+      if (!mounted) return;
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
       Navigator.pop(context);
 
-      //show error message
-      displayMessageToUser(e.message!, context);
+      // show error message safely
+      if (!mounted) return;
+      displayMessageToUser(e.code, context);
     }
   }
 
