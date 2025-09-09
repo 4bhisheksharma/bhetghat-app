@@ -40,11 +40,11 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 50, left: 25),
+                    padding: const EdgeInsets.only(top: 60, left: 25),
                     child: Row(children: [MyBackButton()]),
                   ),
 
-                  SizedBox(height: 10),
+                  SizedBox(height: 50),
                   //profile
                   Container(
                     decoration: BoxDecoration(
