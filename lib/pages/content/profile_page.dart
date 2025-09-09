@@ -1,3 +1,4 @@
+import 'package:bhetghat/components/my_back_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: getUserDetails(),
@@ -41,7 +38,39 @@ class ProfilePage extends StatelessWidget {
 
             return Center(
               child: Column(
-                children: [Text(user!['email']), Text(user['username'])],
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50, left: 25),
+                    child: Row(children: [MyBackButton()]),
+                  ),
+
+                  SizedBox(height: 10),
+                  //profile
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+
+                    padding: const EdgeInsets.all(25.0),
+                    child: Icon(Icons.person, size: 64),
+                  ),
+
+                  SizedBox(height: 25),
+                  //email
+                  Text(
+                    user!['username'],
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+
+                  SizedBox(height: 10),
+
+                  //username
+                  Text(
+                    user['email'],
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
+                ],
               ),
             );
           } else {
