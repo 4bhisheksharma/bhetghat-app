@@ -15,7 +15,7 @@ A minimal social media application built with Flutter and Firebase, allowing use
 ## Screenshots
 
 ### Login Page
-<img src="assets/screenshots/login.png" width="600"/>
+<img src="assets/screenshots/login.png" width="200"/>
 
 ### Registration Page
 <img src="assets/screenshots/register.png" width="600"/>
