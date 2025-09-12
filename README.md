@@ -18,19 +18,19 @@ A minimal social media application built with Flutter and Firebase, allowing use
 <img src="assets/screenshots/login.png" width="200"/>
 
 ### Registration Page
-<img src="assets/screenshots/register.png" width="600"/>
+<img src="assets/screenshots/register.png" width="200"/>
 
 ### Home Feed
-<img src="assets/screenshots/home.png" width="600"/>
+<img src="assets/screenshots/home.png" width="200"/>
 
 ### User Profile
-<img src="assets/screenshots/profile.png" width="600"/>
+<img src="assets/screenshots/profile.png" width="200"/>
 
 ### All Users
-<img src="assets/screenshots/allusers.png" width="600"/>
+<img src="assets/screenshots/allusers.png" width="200"/>
 
 ### Navigation Drawer
-<img src="assets/screenshots/drawer.png" width="600"/>
+<img src="assets/screenshots/drawer.png" width="200"/>
 
 
 ## Technologies Used
